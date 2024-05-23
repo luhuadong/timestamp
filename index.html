@@ -19,7 +19,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 80%;
+            width: 90%;
             max-width: 600px;
         }
         .row {
@@ -31,15 +31,20 @@
         .row .input-group {
             flex: 1;
             margin: 0 10px;
+            display: flex;
+            flex-direction: column;
         }
         .input-group label {
-            display: block;
             margin-bottom: 5px;
         }
         .input-group input, .input-group select {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 8px;
+            margin: 0;
             box-sizing: border-box;
+        }
+        .input-group {
+            flex: 1;
         }
         .description {
             margin-bottom: 20px;
@@ -48,18 +53,18 @@
             line-height: 1.5;
         }
         .timezone {
-            /* display: flex; */
-            /* align-items: center; */
             margin: 0 10px;
-            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
         .timezone label {
-            display: block;
             margin-bottom: 5px;
         }
         .timezone select {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 8px;
+            margin: 0;
             box-sizing: border-box;
         }
     </style>
