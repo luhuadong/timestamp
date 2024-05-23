@@ -36,7 +36,7 @@
             display: block;
             margin-bottom: 5px;
         }
-        .input-group input {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
@@ -44,37 +44,59 @@
         .description {
             margin-bottom: 20px;
             font-size: 14px;
+            color: grey;
             line-height: 1.5;
+        }
+        .timezone {
+            /* display: flex; */
+            /* align-items: center; */
+            margin: 0 10px;
+            font-size: 14px;
+        }
+        .timezone label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .timezone select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="description">
-            <p>时间戳（timestamp）是自1970年1月1日00:00:00 UTC以来经过的秒数，这一时间点被称为Unix Epoch或Unix时间的起点。时间戳广泛用于计算机系统中，因为它提供了一种简单且一致的方式来表示和计算时间。</p>
+            <p>时间戳（timestamp）是自1970年1月1日 00:00:00 UTC 以来经过的秒数，这一时间点被称为 Unix Epoch 或 Unix 时间的起点。时间戳广泛用于计算机系统中，因为它提供了一种简单且一致的方式来表示和计算时间。</p>
         </div>
         <div class="row">
             <div class="input-group">
-                <label for="current-time">当前时间:</label>
+                <label for="current-time">当前时间：</label>
                 <input type="text" id="current-time" readonly>
             </div>
             <div class="input-group">
-                <label for="current-timestamp">当前时间戳:</label>
+                <label for="current-timestamp">当前时间戳：</label>
                 <input type="text" id="current-timestamp" readonly>
             </div>
             <div class="input-group">
-                <label for="current-timezone">当前时区:</label>
+                <label for="current-timezone">当前时区：</label>
                 <input type="text" id="current-timezone" readonly>
             </div>
         </div>
         <div class="row">
             <div class="input-group">
-                <label for="datetime-input">输入日期时间:</label>
-                <input type="text" id="datetime-input" placeholder="2024-05-23 14:30:00">
+                <label for="datetime-input">输入日期时间：</label>
+                <input type="text" id="datetime-input" placeholder="1970-01-01 00:00:00">
             </div>
             <div class="input-group">
-                <label for="timestamp-input">输入时间戳:</label>
-                <input type="text" id="timestamp-input" placeholder="1653307800">
+                <label for="timestamp-input">输入时间戳：</label>
+                <input type="text" id="timestamp-input" placeholder="0">
+            </div>
+            <div class="timezone">
+                <label for="timezone-select">时区：</label>
+                <select id="timezone-select">
+                    <!-- 时区选项将动态生成 -->
+                </select>
             </div>
         </div>
     </div>
