@@ -27,7 +27,11 @@ function updateCurrentTime() {
 }
 
 function convertToTimestamp() {
-    const datetimeStr = document.getElementById('datetime-input').value;
+    let datetimeStr = document.getElementById('datetime-input').value.trim();
+    if (datetimeStr === '') {
+        datetimeStr = '1970-01-01 00:00:00';
+    }
+
     const paddedDatetimeStr = padDateTime(datetimeStr);
     const timezone = document.getElementById('timezone-select').value;
     const datetime = new Date(`${paddedDatetimeStr} ${timezone}`);
@@ -39,7 +43,13 @@ function convertToTimestamp() {
 }
 
 function convertToDatetime() {
-    const timestamp = parseInt(document.getElementById('timestamp-input').value, 10);
+    let timestampStr = document.getElementById('timestamp-input').value.trim();
+    if (timestampStr === '') {
+        timestampStr = '0';
+        document.getElementById('timestamp-input').value = timestampStr;
+    }
+
+    const timestamp = parseInt(timestampStr, 10);
     const timezone = document.getElementById('timezone-select').value;
     if (!isNaN(timestamp)) {
         const datetime = new Date(timestamp * 1000);
@@ -69,7 +79,7 @@ function loadTimezones() {
 document.getElementById('datetime-input').addEventListener('input', convertToTimestamp);
 document.getElementById('timestamp-input').addEventListener('input', convertToDatetime);
 document.getElementById('timezone-select').addEventListener('change', () => {
-    convertToTimestamp();
+    // convertToTimestamp();
     convertToDatetime();
 });
 
