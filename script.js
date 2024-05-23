@@ -127,9 +127,18 @@ function calculateDaysDifference() {
     const today = DateTime.local().startOf('day');
     const diff = selectedDate.diff(today, 'days').days;
 
-    console.log("diff: " + diff)
-
     document.getElementById('days-count').innerText = `${diff}`;
+}
+
+function calculateDaysPercentage() {
+    const today = DateTime.local();
+    const yearStart = DateTime.local(today.year, 1, 1);
+    const daysElapsed = today.diff(yearStart, 'days').days;
+    const daysInYear = yearStart.plus({ years: 1 }).diff(yearStart, 'days').days;
+
+    const percentage = Math.floor((daysElapsed / daysInYear) * 100);
+    document.getElementById('progress-bar-fill').style.width = `${percentage}%`;
+    document.getElementById('progress-bar-text').textContent = `${percentage}%`;
 }
 
 document.getElementById('datetime-input').addEventListener('input', convertToTimestamp);
@@ -149,3 +158,4 @@ populateDaySelect(); // 填充日期选择框
 updateCurrentTime();
 setInterval(updateCurrentTime, 1000);
 calculateDaysDifference(); // 初始计算天数差异
+calculateDaysPercentage(); // 初始化时调用一次
