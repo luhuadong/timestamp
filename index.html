@@ -67,7 +67,27 @@
             margin: 0;
             box-sizing: border-box;
         }
+        .countdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .countdown-group {
+            margin-right: 10px;
+        }
+        .countdown-group label {
+            margin-right: 5px;
+        }
+        .countdown-group select {
+            padding: 8px;
+        }
+        #days-count {
+            font-size: 16px;
+            margin-left: 10px;
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/2.0.2/luxon.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -102,6 +122,25 @@
                 <select id="timezone-select">
                     <!-- 时区选项将动态生成 -->
                 </select>
+            </div>
+        </div>
+        <div class="countdown">
+            <div class="row">
+                <div class="countdown-group">
+                    <select id="year-select"></select>
+                    <label for="year-select">年</label>
+                </div>
+                <div class="countdown-group">
+                    <select id="month-select"></select>
+                    <label for="month-select">月</label>
+                </div>
+                <div class="countdown-group">
+                    <select id="day-select"></select>
+                    <label for="day-select">日</label>
+                </div>
+                <div class="countdown-group">
+                    <label>距离今天：<span id="days-count"></span> 天</label>
+                </div>
             </div>
         </div>
     </div>
