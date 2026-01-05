@@ -2,181 +2,114 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>时间戳转换工具</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 600px;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .row .input-group {
-            flex: 1;
-            margin: 0 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .input-group label {
-            margin-bottom: 5px;
-        }
-        .input-group input, .input-group select {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin: 0;
-            box-sizing: border-box;
-        }
-        .input-group {
-            flex: 1;
-        }
-        .description {
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: grey;
-            line-height: 1.5;
-        }
-        .timezone {
-            margin: 0 10px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .timezone label {
-            margin-bottom: 5px;
-        }
-        .timezone select {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin: 0;
-            box-sizing: border-box;
-        }
-        .countdown {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
-        }
-        .countdown-group {
-            margin-right: 10px;
-        }
-        .countdown-group label {
-            margin-right: 5px;
-        }
-        .countdown-group select {
-            padding: 8px;
-        }
-        #days-count {
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        .progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 20px;
-            background-color: #4caf50;
-            transition: width 0.5s ease-in-out;
-        }
-        .progress-bar-text {
-            color: #000;
-            text-align: center;
-            line-height: 20px;
-            font-size: 14px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>时间工具</title>
+    <link rel="stylesheet" href="./main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/2.0.2/luxon.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="description">
-            <p>时间戳（timestamp）是自1970年1月1日 00:00:00 UTC 以来经过的秒数，这一时间点被称为 Unix Epoch 或 Unix 时间的起点。时间戳广泛用于计算机系统中，因为它提供了一种简单且一致的方式来表示和计算时间。</p>
-        </div>
-        <div class="row">
-            <div class="input-group">
-                <label for="current-time">当前时间：</label>
-                <input type="text" id="current-time" readonly>
-            </div>
-            <div class="input-group">
-                <label for="current-timestamp">当前时间戳：</label>
-                <input type="text" id="current-timestamp" readonly>
-            </div>
-            <div class="input-group">
-                <label for="current-timezone">当前时区：</label>
-                <input type="text" id="current-timezone" readonly>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-group">
-                <label for="datetime-input">输入日期时间：</label>
-                <input type="text" id="datetime-input" placeholder="1970-01-01 00:00:00">
-            </div>
-            <div class="input-group">
-                <label for="timestamp-input">输入时间戳：</label>
-                <input type="text" id="timestamp-input" placeholder="0">
-            </div>
-            <div class="timezone">
-                <label for="timezone-select">时区：</label>
-                <select id="timezone-select">
-                    <!-- 时区选项将动态生成 -->
-                </select>
-            </div>
-        </div>
-        <div class="countdown">
-            <div class="row">
-                <div class="countdown-group">
-                    <select id="year-select"></select>
-                    <label for="year-select">年</label>
+    <div id="container">
+        <h1>时间工具</h1>
+        <article>一个实用的时间工具，支持时间戳转换、多时区显示、倒计时等功能。</article>
+
+        <!-- 当前时间显示 -->
+        <section class="section">
+            <h2>当前时间</h2>
+            <div class="info-row">
+                <div class="info-item">
+                    <label>本地时间：</label>
+                    <span id="current-time"></span>
                 </div>
-                <div class="countdown-group">
-                    <select id="month-select"></select>
-                    <label for="month-select">月</label>
+                <div class="info-item">
+                    <label>时间戳：</label>
+                    <span id="current-timestamp"></span>
                 </div>
-                <div class="countdown-group">
-                    <select id="day-select"></select>
-                    <label for="day-select">日</label>
-                </div>
-                <div class="countdown-group">
-                    <label>距离今天：<span id="days-count"></span> 天</label>
+                <div class="info-item">
+                    <label>时区：</label>
+                    <span id="current-timezone"></span>
                 </div>
             </div>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progress-bar-fill"></div>
-        </div>
-        <div class="progress-bar-text">
-            今年已过去 <span id="progress-bar-text"></span>
-        </div>
+        </section>
+
+        <!-- 时间戳转换 -->
+        <section class="section">
+            <h2>时间戳转换</h2>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="datetime-input">日期时间：</label>
+                    <input type="text" id="datetime-input" placeholder="1970-01-01 00:00:00">
+                    <div class="quick-buttons">
+                        <button class="quick-btn" data-action="now">现在</button>
+                        <button class="quick-btn" data-action="today">今天</button>
+                        <button class="quick-btn" data-action="tomorrow">明天</button>
+                        <button class="quick-btn" data-action="week-later">一周后</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="timestamp-input">时间戳：</label>
+                    <input type="text" id="timestamp-input" placeholder="0">
+                </div>
+                <div class="input-group">
+                    <label for="timezone-select">时区：</label>
+                    <select id="timezone-select">
+                        <option value="UTC">UTC</option>
+                        <!-- 时区选项将动态生成 -->
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- 多时区显示 -->
+        <section class="section">
+            <h2>多时区时间</h2>
+            <div id="multi-timezone-display" class="timezone-grid">
+                <!-- 动态生成多个时区的时间显示 -->
+            </div>
+        </section>
+
+        <!-- 倒计时 -->
+        <section class="section">
+            <h2>倒计时</h2>
+            <div class="input-row">
+                <div class="input-group">
+                    <select id="countdown-year"></select>
+                    <label for="countdown-year">年</label>
+                </div>
+                <div class="input-group">
+                    <select id="countdown-month"></select>
+                    <label for="countdown-month">月</label>
+                </div>
+                <div class="input-group">
+                    <select id="countdown-day"></select>
+                    <label for="countdown-day">日</label>
+                </div>
+                <div class="info-item">
+                    <label>距离今天：</label>
+                    <span id="days-count"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 年度进度 -->
+        <section class="section">
+            <h2>年度进度</h2>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <div class="progress-text">
+                    今年已过去 <span id="progress-bar-text"></span>
+                </div>
+            </div>
+        </section>
     </div>
+
     <footer>
-        <div class="footer">
-            <a href="https://github.com/luhuadong/timestamp"><img src="https://cdn.jsdelivr.net/gh/Closty/duanwangzhi/github.png" style="width:50px;"> </a>
-        </div>
+        <center>
+            <a href="https://github.com/luhuadong/timestamp" target="_blank"><img src="https://cdn.jsdelivr.net/gh/Closty/duanwangzhi/github.png" style="width:50px;"> </a>
+        </center>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
