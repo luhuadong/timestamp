@@ -46,6 +46,13 @@ function updateCurrentTime() {
     updateMultiTimezoneDisplay();
 }
 
+// 判断是白天还是黑夜
+function isDaytime(dateTime) {
+    const hour = dateTime.hour;
+    // 早上 6 点到晚上 18 点算白天
+    return hour >= 6 && hour < 18;
+}
+
 // 更新多时区显示
 function updateMultiTimezoneDisplay() {
     const container = document.getElementById('multi-timezone-display');
@@ -54,7 +61,11 @@ function updateMultiTimezoneDisplay() {
     COMMON_TIMEZONES.forEach(tz => {
         const now = DateTime.now().setZone(tz.name);
         const item = document.createElement('div');
-        item.className = 'timezone-item';
+        
+        // 根据时间判断白天/黑夜，添加相应的类
+        const isDay = isDaytime(now);
+        item.className = `timezone-item ${isDay ? 'daytime' : 'nighttime'}`;
+        
         item.innerHTML = `
             <label>${tz.label}</label>
             <div class="time-value">${formatDate(now)}</div>

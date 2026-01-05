@@ -5,53 +5,57 @@
 body {
     margin: 0;
     padding: 20px;
-    background: linear-gradient(135deg, #E8E5D8 0%, #F5F3ED 50%, #E8E5D8 100%);
+    background: #F5F5F0; /* Kindle 纸张色 */
     min-height: 100vh;
     font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    color: #1A1A1A; /* 深灰色文字，高对比 */
 }
 
 #container {
     max-width: 1000px;
     margin: 40px auto;
     padding: 50px 45px;
-    border-radius: 8px;
-    background-color: #FAF9F6;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 
-                0 1px 3px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 0; /* 平面化，无圆角 */
+    background-color: #FFFFFF; /* 纯白背景 */
+    box-shadow: none; /* 去除阴影 */
+    border: 2px solid #000000; /* 黑色边框，高对比 */
 }
 
 h1 { 
-    margin: 0 0 10px 0; 
+    margin: 0 0 20px 0; 
     text-align: center;
-    font-size: 28px;
-    font-weight: 400;
-    color: #2C2C2C;
-    letter-spacing: 0.5px;
+    font-size: 32px;
+    font-weight: 700; /* 加粗，高对比 */
+    color: #000000; /* 纯黑 */
+    letter-spacing: 1px;
+    text-transform: uppercase; /* 大写，更有质感 */
 }
 
 h2 {
-    margin: 0 0 15px 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: #3A3A3A;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    padding-bottom: 8px;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: 700; /* 加粗 */
+    color: #000000; /* 纯黑 */
+    /* border-bottom: 1px solid #CCCCCC; /* 粗黑边框 */
+    padding-bottom: 10px;
+    text-transform: uppercase;
 }
 
 article { 
-    font-size: 14px; 
-    color: #6B6B6B;
+    font-size: 16px; 
+    color: #333333; /* 深灰 */
     line-height: 1.8;
     text-align: center;
-    padding: 15px 0;
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 20px 0;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #000000; /* 黑色边框 */
 }
 
 .section {
-    margin-bottom: 35px;
+    margin-bottom: 10px;
+    /*border: 1px solid #CCCCCC; /* 浅灰边框 */
+    padding: 25px;
+    background: #FFFFFF;
 }
 
 .info-row {
@@ -64,42 +68,52 @@ article {
     flex: 1;
     min-width: 150px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 14px;
-    line-height: 1;
+    flex-direction: column; /* 垂直布局，label 在上，span 在下 */
+    align-items: flex-start; /* 左对齐 */
+    justify-content: flex-start;
+    gap: 10px; /* 增加间距 */
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 15px;
+    border: 2px solid #000000;
 }
 
 .info-item label {
-    color: #5A5A5A;
-    font-weight: 500;
+    color: #000000; /* 纯黑 */
+    font-weight: 700; /* 加粗 */
     margin: 0;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
+    line-height: 1.5;
+    display: block; /* 块级元素，独占一行 */
+    width: 100%;
 }
 
 .info-item span {
-    color: #2C2C2C;
+    color: #000000; /* 纯黑 */
     font-family: 'Courier New', monospace;
-    font-weight: 600;
+    font-weight: 700; /* 加粗 */
     margin: 0;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
+    line-height: 1.5;
+    display: block; /* 块级元素，独占一行 */
+    width: 100%;
+}
+
+/* 无边框的 info-item（用于倒计时部分） */
+.info-item-no-border {
+    border: none !important;
+    padding: 0;
+    background: transparent;
 }
 
 .input-row {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 /* 时间戳转换部分在宽屏上水平布局 */
@@ -141,9 +155,18 @@ article {
         flex: 0 0 auto;
         margin-top: 0;
         display: flex;
+        flex-direction: row; /* 倒计时部分保持水平布局 */
         align-items: center;
         justify-content: center;
         height: 100%;
+        gap: 8px;
+    }
+    
+    .section:nth-of-type(4) .info-item label,
+    .section:nth-of-type(4) .info-item span {
+        display: inline-flex;
+        align-items: center;
+        width: auto;
     }
 }
 
@@ -166,9 +189,9 @@ article {
 
 /* 倒计时天数显示样式 */
 #days-count {
-    font-size: 24px;
-    font-weight: 700;
-    color: #FF6B6B;
+    font-size: 32px; /* 更大字体 */
+    font-weight: 900; /* 超粗 */
+    color: #000000; /* 纯黑，高对比 */
     font-family: 'Courier New', monospace;
     display: inline-flex;
     align-items: center;
@@ -176,100 +199,117 @@ article {
 }
 
 .input-group label {
-    color: #5A5A5A;
-    font-size: 14px;
-    font-weight: 500;
+    color: #000000; /* 纯黑 */
+    font-size: 16px;
+    font-weight: 700; /* 加粗 */
 }
 
 .input-group input,
 .input-group select {
-    padding: 10px 12px;
-    font-size: 14px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    color: #2C2C2C;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #000000; /* 黑色边框 */
+    border-radius: 0; /* 平面化，无圆角 */
+    background-color: #FFFFFF; /* 纯白背景 */
+    color: #000000; /* 黑色文字 */
+    transition: none; /* 去除过渡效果 */
     font-family: 'Courier New', monospace;
+    font-weight: 600;
 }
 
 .input-group input:focus,
 .input-group select:focus {
     outline: none;
-    border-color: #8B7355;
-    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+    border-color: #000000; /* 保持黑色 */
+    background-color: #F5F5F0; /* 浅灰背景 */
+    box-shadow: none; /* 去除阴影 */
 }
 
 .quick-buttons {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .quick-btn {
-    padding: 6px 12px;
-    font-size: 12px;
-    background-color: #8B7355;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #000000; /* 黑色背景 */
+    color: #FFFFFF; /* 白色文字 */
+    border: 2px solid #000000; /* 黑色边框 */
+    border-radius: 0; /* 平面化 */
     cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    font-weight: 500;
+    transition: none; /* 去除过渡 */
+    font-weight: 700; /* 加粗 */
+    text-transform: uppercase; /* 大写 */
 }
 
 .quick-btn:hover {
-    background-color: #6B5745;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    background-color: #333333; /* 深灰 */
+    color: #FFFFFF;
+    box-shadow: none; /* 去除阴影 */
 }
 
 .quick-btn:active {
-    transform: translateY(1px);
+    background-color: #000000;
+    transform: none; /* 去除变换 */
 }
 
 .timezone-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-    margin-top: 10px;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .timezone-item {
-    padding: 10px 12px;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 15px;
+    background-color: #FFFFFF; /* 纯白背景 */
+    border-radius: 0; /* 平面化 */
+    border: 2px solid #000000; /* 黑色边框 */
 }
 
 .timezone-item label {
     display: block;
     font-size: 12px;
-    color: #6B6B6B;
-    margin-bottom: 4px;
+    color: #666666; /* 中灰 */
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .timezone-item .time-value {
-    font-size: 14px;
-    color: #2C2C2C;
+    font-size: 14px; /* 减小字体 */
+    color: #000000; /* 纯黑 */
     font-family: 'Courier New', monospace;
-    font-weight: 600;
+    font-weight: 700; /* 加粗 */
+}
+
+/* 白天样式：底部边框为橘色 */
+.timezone-item.daytime {
+    border-bottom: 4px solid #FF8C00; /* 橘色 */
+}
+
+/* 黑夜样式：底部边框为蓝色 */
+.timezone-item.nighttime {
+    border-bottom: 4px solid #4169E1; /* 蓝色 */
 }
 
 .result-box {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #FFFFFF; /* 纯白背景 */
+    border-radius: 0; /* 平面化 */
+    border: 2px solid #000000; /* 黑色边框 */
 }
 
 .result-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
 }
 
 .result-item:last-child {
@@ -277,75 +317,77 @@ article {
 }
 
 .result-item label {
-    color: #5A5A5A;
-    font-weight: 500;
-    min-width: 80px;
+    color: #000000; /* 纯黑 */
+    font-weight: 700; /* 加粗 */
+    min-width: 100px;
 }
 
 .result-item span {
-    color: #2C2C2C;
+    color: #000000; /* 纯黑 */
     font-family: 'Courier New', monospace;
-    font-weight: 600;
+    font-weight: 700; /* 加粗 */
 }
 
 .progress-container {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 24px;
-    background-color: rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
+    height: 30px;
+    background-color: #E0E0E0; /* 浅灰背景 */
+    border-radius: 0; /* 平面化 */
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #000000; /* 黑色边框 */
 }
 
 .progress-bar-fill {
     height: 100%;
-    background-color: #8B7355;
+    background-color: #000000; /* 黑色填充 */
     transition: width 0.5s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: 500;
+    color: #FFFFFF; /* 白色文字 */
+    font-size: 14px;
+    font-weight: 700; /* 加粗 */
 }
 
 .progress-text {
     text-align: center;
-    font-size: 14px;
-    color: #5A5A5A;
+    font-size: 16px;
+    color: #000000; /* 纯黑 */
+    font-weight: 700; /* 加粗 */
 }
 
 .progress-text span {
-    color: #2C2C2C;
-    font-weight: 600;
+    color: #000000; /* 纯黑 */
+    font-weight: 900; /* 超粗 */
 }
 
 footer {
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 20px 0;
     text-align: center;
 }
 
 footer a {
-    opacity: 0.6;
-    transition: opacity 0.2s;
+    opacity: 0.8;
+    transition: none; /* 去除过渡 */
 }
 
 footer a:hover {
-    opacity: 0.8;
+    opacity: 1;
 }
 
 footer img {
-    filter: grayscale(100%);
-    transition: filter 0.2s;
+    filter: grayscale(100%) contrast(200%); /* 黑白高对比 */
+    transition: none; /* 去除过渡 */
 }
 
 footer a:hover img {
-    filter: grayscale(0%);
+    filter: grayscale(100%) contrast(200%); /* 保持黑白 */
 }
 
 /* 响应式设计 */
@@ -356,6 +398,19 @@ footer a:hover img {
     
     #container {
         padding: 30px 20px;
+        border-width: 1px; /* 窄屏时边框稍细 */
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    .section {
+        padding: 15px;
     }
     
     .info-row {
@@ -371,4 +426,3 @@ footer a:hover img {
         justify-content: center;
     }
 }
-
